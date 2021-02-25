@@ -13,8 +13,13 @@ import traceback
 import datetime
 import errno
 import pandas as pd
-from user_password import *
-from api_details import *
+
+
+NAME = "Dublin"
+STATIONS = "https://api.jcdecaux.com/vls/v1/stations"
+APIKEY = "d337450524e824d9d4323afbebd4ed51f242c995"
+USER = "tim"
+PASSWORD = "Ylu3shin123!!"
 
 URI = "dbbikes.cjlp5umzs5hs.us-east-1.rds.amazonaws.com"
 PORT = "3306"
