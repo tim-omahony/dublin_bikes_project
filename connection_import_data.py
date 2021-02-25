@@ -108,16 +108,3 @@ def execute():
 
 
 execute()
-
-df = pd.read_sql_table("station", engine)
-
-display(df.head())
-
-sql = "select count(*) from station"
-# for row in engine.execute(sql):
-#     print(row)
-print(engine.execute(sql).fetchall())
-
-sql = "select name from station limit 10;"
-for row in engine.execute(sql):
-    print(row)
