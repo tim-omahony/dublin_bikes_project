@@ -105,7 +105,7 @@ def execute():
             print(r, now)
             write_to_file(r.text, now)
             stations_to_db(r.text)
-            time.sleep(5*60)
+#             time.sleep(5*60)
         except:
             print(traceback.format_exc())
             if engine is None:
