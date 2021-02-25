@@ -43,7 +43,7 @@ position_lng REAL,
 status VARCHAR(256),
 available_bikes INTEGER,
 available_bike_stands INTEGER,
-last_update INTEGER
+last_update DATETIME
 )
 """
 try:
@@ -83,7 +83,10 @@ def stations_to_db(text):
         engine.execute("insert into station values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", vals)
     return
 
-
+# Select
+#     FROM_UNIXTIME({timestampcolumn here}) asDateTime_Column
+# FROM
+#     {tablenamehere}
 def make_request():
     r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
     print(r)
@@ -92,32 +95,19 @@ def make_request():
 
 def execute():
     print("executing")
-    count = 0
-    while True:
-        try:
-            now = datetime.datetime.now()
-            r = make_request()
-            print(r, now)
-            write_to_file(r.text, now)
-            stations_to_db(r.text)
-            time.sleep(5*60)
-        except:
-            print(traceback.format_exc())
-            if engine is None:
-                return
+
+    try:
+        now = datetime.datetime.now()
+        r = make_request()
+        print(r, now)
+        write_to_file(r.text, now)
+        stations_to_db(r.text)
+        time.sleep(5*60)
+    except:
+        print(traceback.format_exc())
+        if engine is None:
+            return
 
 
 execute()
 
-df = pd.read_sql_table("station", engine)
-
-display(df.head())
-
-sql = "select count(*) from station"
-# for row in engine.execute(sql):
-#     print(row)
-print(engine.execute(sql).fetchall())
-
-sql = "select name from station limit 10;"
-for row in engine.execute(sql):
-    print(row)
