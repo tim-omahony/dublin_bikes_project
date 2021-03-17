@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flask app</title>
+    <meta name="description" content="First index.html">
+    <meta name="author" content="Tim">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <script src="../static/index.js"></script>
+</head>
+<body>
+<div id="map"></div>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnvBV5MYvRFbTnN5oUsh7sdL6ASs59h5Y&callback=initMap&libraries=&v=weekly"
+        async
+</script>
+</body>
+</html>
+
+<!--src="https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyCnvBV5MYvRFbTnN5oUsh7sdL6ASs59h5Y&callback=initMap&libraries=&v=weekly"-->
