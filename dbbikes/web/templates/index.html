@@ -32,8 +32,8 @@
             const markers = data.stations.map(station => {
                 const marker = new google.maps.Marker({
                     position: {
-                        lat: Number.parseFloat(station.lat),
-                        lng: Number.parseFloat(station.lng)
+                        lat: Number.parseFloat(station.position_lat),
+                        lng: Number.parseFloat(station.position_lng)
                     },
                     title: station.address,
                     label: getMarkerLabel(station).toString(),
@@ -45,7 +45,6 @@
                 marker.addListener('click', () => {
                     infowindow.open(map, marker);
                 });
-
                 return marker;
             });
             new MarkerClusterer(map, markers, {
@@ -54,7 +53,7 @@
         });
     }
 
-    function getMarkerLabel(station) {
+    function getMarkerLabel(station)  {
         if (showAvailableBike) {
             return station.available_bikes;
         } else {

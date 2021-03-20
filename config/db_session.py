@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
-environment = os.environ['FLASK_ENV'] or 'development'
+environment = os.environ.get('FLASK_ENV') or 'development'
 if environment == 'development':
     from config.db_details import *
 else:
