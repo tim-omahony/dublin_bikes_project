@@ -1,3 +1,4 @@
 .idea/
 *.pyc
 config/db_details.py
+venv
