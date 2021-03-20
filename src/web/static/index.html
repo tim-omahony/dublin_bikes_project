@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask app</title>
+    <meta name="description" content="First index.html">
+    <meta name="author" content="Ciara">
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM4kLa8V93UKa1qyQcQrU9dASU2JlbO0&callback=initMap&libraries=&v=weekly"
+        async></script>
+<script>
+    // Toggle available bikes or available bike stands in map marker
+    let showAvailableBike = true;
+
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 14,
+            center: {
+                lat: 53.34553356002277,
+                lng: -6.271461165258878
+            }
+        });
+
+        fetch('/stations').then(async response => {
+            const data = await response.json();
+            const markers = data.stations.map(station => {
+                const marker = new google.maps.Marker({
+                    position: {
+                        lat: Number.parseFloat(station.lat),
+                        lng: Number.parseFloat(station.lng)
+                    },
+                    title: station.address,
+                    label: getMarkerLabel(station).toString(),
+                    map: map
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: `<h3>${station.address}</h3><p>Available Bikes: <strong>${station.available_bikes}</strong></p><p>Available Spaces: <strong>${station.available_bike_stands}</strong></p>`,
+                });
+                marker.addListener('click', () => {
+                    infowindow.open(map, marker);
+                });
+
+                return marker;
+            });
+            new MarkerClusterer(map, markers, {
+                imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+            });
+        });
+    }
+
+    function getMarkerLabel(station) {
+        if (showAvailableBike) {
+            return station.available_bikes;
+        } else {
+            return station.available_bike_stands;
+        }
+    }
+</script>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        height: 100vh;
+        width: 100vw;
+    }
+</style>
