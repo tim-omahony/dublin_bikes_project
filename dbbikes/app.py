@@ -8,12 +8,15 @@ NAME = "Dublin"
 STATIONS_URI = "https://api.jcdecaux.com/vls/v1/stations"
 
 app = Flask(__name__)
+app._static_folder = 'web/static'
+app.template_folder = 'web/templates'
 
 session = Session()
 
+
 @app.route("/")
 def root():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 
 @app.route("/stations")
@@ -28,7 +31,8 @@ def stations():
 @app.route("/stations/<int:station_id>/available")
 def get_stations(station_id):
     fetch_station = session.query(Station).get(station_id)
-    return jsonify(available_bikes=fetch_station.available_bikes, available_bike_stands=fetch_station.available_bike_stands)
+    return jsonify(available_bikes=fetch_station.available_bikes,
+                   available_bike_stands=fetch_station.available_bike_stands)
 
 
 @app.route('/stations/<int:station_id>')

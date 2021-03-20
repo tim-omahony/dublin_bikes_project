@@ -6,9 +6,7 @@
     <meta name="description" content="First index.html">
     <meta name="author" content="Ciara">
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="filters.js"></script>
+    <script src="{{ url_for('static', filename='filters.js') }}"></script>
 </head>
 <body>
 <div id="map"></div>
