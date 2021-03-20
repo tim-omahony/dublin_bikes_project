@@ -1,0 +1,5 @@
+USER = "ciara"
+PASSWORD = "Ciara123"
+PORT = "3306"
+DB = "dbbikes"
+URI = "dbbikes.cvr6gofoxmkp.us-east-2.rds.amazonaws.com"
