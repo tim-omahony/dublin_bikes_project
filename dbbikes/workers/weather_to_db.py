@@ -4,7 +4,7 @@ import traceback
 import requests
 import json
 from config.db_session import Session
-from src.models.weather import Weather
+from dbbikes.models.weather import Weather
 
 
 session = Session()
