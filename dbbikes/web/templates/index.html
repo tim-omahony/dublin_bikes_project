@@ -32,8 +32,8 @@
             const markers = data.stations.map(station => {
                 const marker = new google.maps.Marker({
                     position: {
-                        lat: Number.parseFloat(station.position_lat),
-                        lng: Number.parseFloat(station.position_lng)
+                        lat: Number.parseFloat(station.lat),
+                        lng: Number.parseFloat(station.lng)
                     },
                     title: station.address,
                     label: getMarkerLabel(station).toString(),
