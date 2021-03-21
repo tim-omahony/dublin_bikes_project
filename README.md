@@ -10,7 +10,11 @@ FLASK_ENV=production FLASK_APP=app.py python -m flask run
  ```
 ##Running migrations
 ```bash
-python {name_of_migration}.py
+python3 -m {module_path.class}
+```
+EG
+```bash
+python3 -m dbbikes.workers.connection_import_data
 ```
 
 #Setting database details

@@ -4,8 +4,8 @@ from sqlalchemy import Column, Integer, String, Float, DateTime
 Base = declarative_base()
 
 
-class Station(Base):
-        __tablename__ = 'stations'
+class DublinBikesStation(Base):
+        __tablename__ = 'dublin_bikes_stations'
 
         id = Column(Integer, primary_key=True)
         address = Column(String)

@@ -34,13 +34,13 @@ def stations_to_db(text):
     print(type(stations), len(stations))
     for station in stations:
         print(station)
-        stationInstance = Station(address=station.get('address'), banking=int(station.get('banking')), bike_stands=station.get('bike_stands'),
+        station_instance = Station(address=station.get('address'), banking=int(station.get('banking')), bike_stands=station.get('bike_stands'),
                 bonus=int(station.get('bonus')), contract_name=station.get('contract_name'), name=station.get('name'),
-                number=station.get('number'), position_lat=station.get('position').get('lat'), position_lng=station.get('position').get('lng'),
-               status=station.get('status'), available_bikes=int(station.get('available_bikes')), available_bike_stands=int(station.get('available_bike_stands')),
+                number=station.get('number'), lat=station.get('position').get('lat'), lng=station.get('position').get('lng'),
+                status=station.get('status'), available_bikes=int(station.get('available_bikes')), available_bike_stands=int(station.get('available_bike_stands')),
                 last_update=datetime.datetime.fromtimestamp(station.get('last_update') / 1e3)
                 )
-        session.add(stationInstance)
+        session.add(station_instance)
         session.commit()
     return
 
