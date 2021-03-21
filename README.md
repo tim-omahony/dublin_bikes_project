@@ -1,19 +1,19 @@
 # dublin_bikes_project
-##Running the app
-###Locally
+## Running the app
+### Locally
  ```bash
 FLASK_ENV=development FLASK_APP=app.py python -m flask run
 ````
-###In production
+### In production
  ```bash
 FLASK_ENV=production FLASK_APP=app.py python -m flask run
  ```
-##Running migrations
+## Running migrations
 ```bash
 python {name_of_migration}.py
 ```
 
-#Setting database details
+# Setting database details
 Copy the example details to a file called db_details and set user and password to your local user and db password
 ```bash
 cp config/db_details.py.example config/db_details.py
