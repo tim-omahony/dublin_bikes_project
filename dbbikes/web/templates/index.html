@@ -6,14 +6,21 @@
     <meta name="description" content="First index.html">
     <meta name="author" content="Ciara">
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-    <script src="{{ url_for('static', filename='filters.js') }}"></script>
 </head>
 <body>
+<h1>Dublin Bikes</h1>
+<input
+        id="pac-input"
+        class="controls"
+        type="text"
+        placeholder="Search Box"
+/>
 <div id="map"></div>
 </body>
 </html>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPM4kLa8V93UKa1qyQcQrU9dASU2JlbO0&callback=initMap&libraries=&v=weekly"
-        async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbh_G3I36ECDIRfAn_UTm-eXz5F47tcRI&callback=initMap&libraries=places&v=weekly"
+        async>
+</script>
 <script>
     // Toggle available bikes or available bike stands in map marker
     let showAvailableBike = true;
@@ -24,9 +31,15 @@
             center: {
                 lat: 53.34553356002277,
                 lng: -6.271461165258878
-            }
+            },
+            mapTypeId: "roadmap",
         });
 
+        populateStations(map);
+        initAutocomplete(map);
+    }
+
+    function populateStations(map) {
         fetch('/stations').then(async response => {
             const data = await response.json();
             const markers = data.stations.map(station => {
@@ -45,6 +58,7 @@
                 marker.addListener('click', () => {
                     infowindow.open(map, marker);
                 });
+
                 return marker;
             });
             new MarkerClusterer(map, markers, {
@@ -53,12 +67,67 @@
         });
     }
 
-    function getMarkerLabel(station)  {
+    function getMarkerLabel(station) {
         if (showAvailableBike) {
             return station.available_bikes;
         } else {
             return station.available_bike_stands;
         }
+    }
+
+    function initAutocomplete(map) {
+        // Create the search box
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
+        let markers = [];
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+            // Clear out the old markers.
+            markers.forEach((marker) => {
+                marker.setMap(null);
+            });
+            markers = [];
+            // For each place, get the icon, name and location.
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach((place) => {
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                const icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+                // Create a marker for each place.
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    })
+                );
+
+                if (place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
     }
 </script>
 <style>
