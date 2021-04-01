@@ -1,0 +1,416 @@
+@import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
+
+html, body {
+  height: 100%;
+  margin: 0 auto ;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  align-items: center;
+  background-color: #F4C52F;
+  background-image: url('https://res.cloudinary.com/dt4qeehms/image/upload/v1476716211/weather%20machine/background-transp.png');
+  display: flex;
+  flex-direction: column;
+  background-size: auto 300px;
+  background-repeat: repeat-x;
+  background-position: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  animation: animatedBackground 75s linear infinite;
+}
+
+@keyframes animatedBackground {
+  from { background-position: 0; }
+  to { background-position: 2250px; }
+}
+
+.box-temperature {
+  background-size: 100%;
+  outline: 4px solid black;
+  box-shadow: 18px 22px 35px -6px rgba(0,0,0,0.75);
+  min-height: 460px;
+  overflow: hidden;
+  position: relative;
+  height: 460px;
+  width: 380px;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-delay: 4s;
+}
+
+.box-footer {
+  display: block;
+  font-size: 80%;
+  padding: 25px 0 0 0;
+  text-align: end;
+}
+
+#brick-btn {
+  background-size: 100%;
+  margin: 60px 0 0 17px;
+  width: 40px !important; /* !important: Fix Jquey effect() resize bug */
+  height: 40px !important; /* !important: Fix Jquey effect() bug */
+  border-radius: 0;
+  position: absolute;
+  left: 14px;
+  bottom: 245px;
+  background-color: transparent;
+}
+
+#mario-btn {
+  background-size: 100%;
+  margin: 60px 0 0 17px;
+  width: 35px !important; /* !important: Fix Jquey effect() resize bug */
+  height: 67px !important; /* !important: Fix Jquey effect() resize bug */
+  border-radius: 0;
+  background-image: url('https://res.cloudinary.com/dt4qeehms/image/upload/v1476716210/weather%20machine/mario-stand.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  position: absolute;
+  left: 17px;
+  bottom: 160px;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    background-size: auto 200px;
+    background-repeat: repeat;
+    animation: 0s;
+  }
+
+  .box-temperature {
+    min-height: calc(0.8*460px);
+    height: calc(0.8*460px);
+    width: calc(0.8*380px);
+  }
+
+  #brick-btn {
+    left: calc(0.8*14px);
+    bottom: calc(0.8*245px);
+    width: calc(0.8*40px) !important; /* !important: Fix Jquey effect() resize bug */
+    height: calc(0.8*40px) !important; /* !important: Fix Jquey effect() bug */
+  }
+
+  #mario-btn {
+    left: calc(0.8*17px);
+    bottom: calc(0.8*160px);
+    width: calc(0.8*35px) !important; /* !important: Fix Jquey effect() resize bug */
+    height: calc(0.8*67px) !important; /* !important: Fix Jquey effect() resize bug */
+  }
+}
+
+
+.btn:focus {
+  outline: none;
+}
+
+.displayed-data {
+  font-family: 'Press Start 2P', cursive;
+  margin: 10px 0 0 5px;
+  position: absolute;
+  z-index: 20;
+}
+
+.cityg {
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: -20px;
+  max-width: 60%;
+  text-shadow: 0 1px #FFF;
+  word-spacing: -10px;
+}
+
+.temperature {
+  font-size: 50px;
+  letter-spacing: -2px;
+  text-shadow: 2px 1px #FFF;
+}
+
+.sun-inner {
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  animation-name: suntopmov, sunleftmov;
+  animation-duration: 1.5s, 1.5s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: alternate;
+  position: absolute;
+  z-index: 10;
+}
+
+@keyframes suntopmov {
+  0% {top: 50px; animation-timing-function: ease-out;}
+  50% {top: 160px; animation-timing-function: ease-in;}
+  100% {top: 50px;}
+}
+
+@keyframes sunleftmov {
+  0% {left: 25px;}
+  100% {left: calc(100% - 70px)}
+}
+
+.sun-inner img {
+width: 100%;
+}
+
+.star {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 60px;
+  top: 70px;
+}
+.star img {
+width: 100%;
+}
+
+.cloud-rain {
+  width: 315px;
+  height: 35px;
+}
+
+.cloud-rain img {
+  width: 100%;
+}
+
+#cloud-rain-1 {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  animation-duration: 65s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudrainrighttoleft;
+}
+
+#cloud-rain-2 {
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudrainlefttoright;
+}
+
+#cloud-rain-3 {
+  position: absolute;
+  right: 40px;
+  top: 65px;
+  animation-duration: 40s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudrainlefttoright;
+}
+
+#cloud-rain-4 {
+  position: absolute;
+  right: 40px;
+  top: -15px;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudrainrighttoleft;
+}
+
+@keyframes cloudrainlefttoright {
+  0% {left: -315px;}
+  100% {left: 100%}
+}
+
+@keyframes cloudrainrighttoleft {
+  0% {left: 100%}
+  100% {left: -315px;}
+}
+
+.cloud-double {
+  width: 125px;
+  height: 60px;
+}
+
+.cloud-double img {
+  width: 100%;
+}
+
+#cloud-double-1 {
+  position: absolute;
+  right: 40px;
+  top: 95px;
+  animation-duration: 55s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+    animation-name: clouddoublerighttoleft;
+}
+
+#cloud-double-2 {
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  animation-duration: 190s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublelefttoright;
+}
+
+#cloud-double-3 {
+  position: absolute;
+  right: 40px;
+  top: 65px;
+  animation-duration: 150s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublelefttoright;
+}
+
+#cloud-double-4 {
+  position: absolute;
+  right: 40px;
+  top: -15px;
+  animation-duration: 105s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublerighttoleft;
+}
+
+@keyframes clouddoublelefttoright {
+  0% {left: -125px;}
+  100% {left: 100%}
+}
+
+@keyframes clouddoublerighttoleft {
+  0% {left: 100%}
+  100% {left: -125px;}
+}
+
+.cloud-simple {
+  width: 83px;
+  height: 60px;
+}
+
+.cloud-simple img {
+  width: 100%;
+}
+
+#cloud-simple-1 {
+  position: absolute;
+  right: 40px;
+  top: 85px;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudsimplerighttoleft;
+}
+
+#cloud-simple-2 {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  animation-duration: 40s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudsimplelefttoright;
+}
+
+@keyframes cloudsimplelefttoright {
+  0% {left: -83px;}
+  100% {left: 100%}
+}
+
+@keyframes cloudsimplerighttoleft {
+  0% {left: 100%}
+  100% {left: -83px;}
+}
+
+.leaf-green {
+  width: 40px;
+  height: 35px;
+}
+
+.leaf-green img {
+  width: 100%;
+}
+
+#leaf-green-1 {
+  position: absolute;
+  bottom: 40px;
+  animation-duration: 3s, 3s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+  animation-name: leaflefttoright, leafbottomtop1;
+}
+
+#leaf-green-2 {
+  position: absolute;
+  bottom: 160px;
+  animation-duration: 1.8s, 1.8s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop2;
+}
+
+#leaf-green-3 {
+  position: absolute;
+  bottom: 300px;
+  animation-duration: 2s, 2s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop3;
+}
+
+#leaf-green-4 {
+  position: absolute;
+  bottom: 100px;
+  animation-duration: 1.5s, 1.5s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop4;
+}
+
+@keyframes leaflefttoright {
+  0% {left: -40px;}
+  100% {left: 100%}
+}
+
+@keyframes leafbottomtop1 {
+  0% {bottom: 30px; animation-timing-function: ease-out;}
+  25% {bottom: 60px; animation-timing-function: ease-in;}
+  100% {bottom: 30px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop2 {
+  0% {bottom: 120px; animation-timing-function: ease-out;}
+  25% {bottom: 160px; animation-timing-function: ease-in;}
+  100% {bottom: 120px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop3 {
+  0% {bottom: 300px; animation-timing-function: ease-out;}
+  25% {bottom: 340px; animation-timing-function: ease-in;}
+  100% {bottom: 250px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop4 {
+  0% {bottom: 100px; animation-timing-function: ease-out;}
+  25% {bottom: 140px; animation-timing-function: ease-in;}
+  50% {bottom: 100px; animation-timing-function: ease-out;}
+  75% {bottom: 90px; animation-timing-function: ease-in;}
+  100% {bottom: 120px; animation-timing-function: ease-out;}
+}
+
+@keyframes thundernight {
+  0% {background-color: #020514;}
+  1% {background-color: white;}
+  2% {background-color: #020514;}
+  100% {background-color: #020514;}
+}
+
+@keyframes thunderday {
+  0% {background-color: #1528A2;}
+  1% {background-color: white;}
+  2% {background-color: #1528A2;}
+  100% {background-color: #1528A2;}
+}
