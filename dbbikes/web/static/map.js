@@ -291,6 +291,7 @@ function populateStations(map) {
                 infowindow.close();
             });
             marker.addListener('click', function () {
+                getChartData(station.number);
                 $('#stationModalTitle').html(station.address);
                 $('#stationModalBody').html(`<p>Available Bikes: <strong>${station.available_bikes}</strong></p><p>Available Spaces: <strong>${station.available_bike_stands}</strong></p>`);
                 $('#stationModal').modal('show');
