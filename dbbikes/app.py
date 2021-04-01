@@ -1,7 +1,8 @@
 from flask import Flask, render_template, g, jsonify, config
 from sqlalchemy import create_engine
 from config.db_session import Session
-from dbbikes.models.dublin_bikes_station import DublinBikesStation
+from dbbikes.models.dublin_bikes_station import DublinBikesStation, DublinBikesStationHistory
+import pandas as pd
 
 APIKEY = "f5c6b9cb5c887092253375f0912332f81099e51d"
 NAME = "Dublin"
@@ -39,6 +40,18 @@ def get_stations(station_id):
 def station(station_id):
     fetch_station = session.query(DublinBikesStation).get(station_id)
     return jsonify(station=fetch_station.to_json())
+
+
+@app.route('/stations/occupancy/<int:station_id>')
+def get_occupancy(station_id):
+    sql = f"""
+    SELECT last_update/1000 as updated_on, available_bikes, available_bike_stands, last_update FROM dbbikes_info
+    where number = {station_id}
+    """
+    df = pd.read_sql_query(sql, session.connection())
+    df['last_update'] = pd.to_datetime(df['last_update'], unit='ms')
+    result_df = df.set_index('last_update').resample('1d').mean().to_json(orient='values')
+    return result_df
 
 
 if __name__ == "__main__":

@@ -25,7 +25,6 @@ r = requests.get(STATIONS_URI, params={"apiKey": APIKEY, "contract": NAME})
 def stations_to_db(text):
     stations = json.loads(text)
     for station in stations:
-        print(station)
         vals = (int(station.get('number')), station.get('contract_name'),
                 station.get('name'), station.get('address'), station.get('position').get('lat'),
                 station.get('position').get('lng'), station.get('banking'), station.get('bonus'),
