@@ -1,8 +1,10 @@
-from flask import Flask, render_template, g, jsonify, config
-from sqlalchemy import create_engine
+from flask import Flask, render_template, jsonify, request
 from config.db_session import Session
-from dbbikes.models.dublin_bikes_station import DublinBikesStation, DublinBikesStationHistory
+from dbbikes.models.dublin_bikes_station import DublinBikesStation
 import pandas as pd
+import numpy as np
+import pickle
+from sklearn.linear_model import LinearRegression
 
 APIKEY = "f5c6b9cb5c887092253375f0912332f81099e51d"
 NAME = "Dublin"
@@ -13,6 +15,9 @@ app._static_folder = 'web/static'
 app.template_folder = 'web/templates'
 
 session = Session()
+
+with open('model.pkl', 'rb') as handle:
+    model = pickle.load(handle)
 
 
 @app.route("/")
@@ -45,13 +50,27 @@ def station(station_id):
 @app.route('/stations/occupancy/<int:station_id>')
 def get_occupancy(station_id):
     sql = f"""
-    SELECT last_update/1000 as updated_on, available_bikes, available_bike_stands, last_update FROM dbbikes_info
+    SELECT last_update/1000 as updated_on, available_bikes, last_update FROM dbbikes_info
     where number = {station_id}
     """
     df = pd.read_sql_query(sql, session.connection())
     df['last_update'] = pd.to_datetime(df['last_update'], unit='ms')
     result_df = df.set_index('last_update').resample('1d').mean().to_json(orient='values')
     return result_df
+
+
+@app.route('/predict')
+def predict():
+    args = request.args
+    station_id = int(args.get('station'))
+    weekday = int(args.get('weekday'))
+    hour = int(args.get('hour'))
+    hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    hours[hour] = 1
+    prediction = model[station_id][weekday].predict([hours])
+    result = {'available_bikes': prediction[0][0],
+              'temperature': prediction[0][1]}
+    return result
 
 
 if __name__ == "__main__":
