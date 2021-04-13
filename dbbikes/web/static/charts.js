@@ -1,4 +1,4 @@
-google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.load('current', {packages: ['corechart', 'bar']});
 
 function getChartData(stationId) {
     fetch('/stations/occupancy/' + stationId).then(async response => {
@@ -10,10 +10,8 @@ function getChartData(stationId) {
                 d[0] = date;
                 return d;
             });
-            console.log('response data?', data)
             drawChart(data);
         } catch (error) {
-            console.log('Error happened here!')
             console.error(error)
         }
     });
@@ -21,22 +19,22 @@ function getChartData(stationId) {
 
 
 function drawChart(stats) {
-    var data = google.visualization.arrayToDataTable([['Timestamp', 'Bikes', 'Stands']].concat(stats));
+    var data = google.visualization.arrayToDataTable([['Timestamp', 'Available Bikes']].concat(stats));
 
     var options = {
-        hAxis: {
-            title: 'Days',
-            format: "yyyy/MM/dd",
+        bars: 'vertical',
+        axes: {
+            x: {
+                0: {side: 'top', label: 'Count'}
+            },
+            y: {
+                format: "yyyy/MM/dd"
+            }
         },
-        vAxis: {
-            title: 'Count'
-        },
-        colors: ['#a52714', '#097138'],
         width: '100%',
         height: 300,
-
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('stationModalChart'));
+    var chart = new google.visualization.BarChart(document.getElementById('stationModalChart'));
     chart.draw(data, options);
 }

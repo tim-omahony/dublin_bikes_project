@@ -1,6 +1,16 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #efece1 !important;
+}
+
+header {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 80px;
 }
 
 main {
@@ -8,7 +18,7 @@ main {
 }
 
 #map {
-    height: 600px;
+    height: 700px;
     width: 100%;
 }
 
@@ -17,6 +27,17 @@ main {
     top: 10px;
     left: 10px;
     z-index: 1000;
+}
+
+.weather {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.weatherwidget-io {
+    width: 400px;
 }
 
 #pac-input {
@@ -35,4 +56,20 @@ main {
 
 .modal-body p:last-child {
     margin-bottom: 0;
+}
+
+footer {
+    width: 100%;
+    margin-top: 30px;
+}
+
+footer > p {
+    text-align: center;
+    color: black;
+    margin: 0;
+    padding: 10px;
+}
+
+footer .heart {
+    color: white;
 }

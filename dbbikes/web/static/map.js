@@ -279,7 +279,8 @@ function populateStations(map) {
                 },
                 title: station.address,
                 label: getMarkerLabel(station).toString(),
-                map: map
+                map: map,
+                // icon: '/static/images/marker.png'
             });
             const infowindow = new google.maps.InfoWindow({
                 content: `<h5>${station.address}</h5><p>Available Bikes: <strong>${station.available_bikes}</strong></p><p>Available Spaces: <strong>${station.available_bike_stands}</strong></p>`,
@@ -294,6 +295,7 @@ function populateStations(map) {
                 getChartData(station.number);
                 $('#stationModalTitle').html(station.address);
                 $('#stationModalBody').html(`<p>Available Bikes: <strong>${station.available_bikes}</strong></p><p>Available Spaces: <strong>${station.available_bike_stands}</strong></p>`);
+                $('#stationModalPredict').html(`<form class="form-inline" onsubmit="predict(event, ${station.number});"><input id="predictTime" class="form-control" type="datetime-local" required><input type="submit" value="Predict" id="button-predict" class="btn btn-primary" /></form>`);
                 $('#stationModal').modal('show');
             });
 
