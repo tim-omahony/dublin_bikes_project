@@ -1,0 +1,178 @@
+body {
+    height: 100%;
+    margin: 2%;
+    padding: 0;
+
+}
+
+.bike {
+    width: 380px;
+    height: 300px;
+}
+.frame {
+    position: absolute;
+    z-index: 1;
+    background: blue;
+}
+.frame.one {
+    top: 100px;
+    left: 40px;
+    width: 100px;
+    height: 8px;
+    transform: rotate(-50deg);
+}
+.frame.two {
+    top: 140px;
+    left: 53px;
+    width: 96px;
+    height: 8px;
+    border-radius: 16px 0 0 16px;
+}
+.frame.three {
+    top: 90px;
+    left: 70px;
+    width: 120px;
+    height: 8px;
+    border-radius: 16px;
+    transform: rotate(75deg);
+
+}
+.frame.four {
+    top: 65px;
+    left: 120px;
+    width: 90px;
+    height: 8px;
+}
+.frame.five {
+    top: 105px;
+    left: 130px;
+    width: 95px;
+    height: 8px;
+    transform: rotate(-50deg);
+}
+.frame.six {
+    top: 75px;
+    left: 140px;
+    width: 140px;
+    height: 8px;
+    border-radius: 16px;
+    transform: rotate(75deg);
+}
+.wheel {
+    position: absolute;
+    z-index: -1;
+}
+.wheel.left, .wheel.right {
+    top: 90px;
+    width: 115px;
+    height: 115px;
+    border: 8px solid black;
+    border-radius: 100%; /* make circular */
+
+}
+.wheel.left:after {
+    z-index: 1;
+    top: 40px;
+    left: 40px;
+    width: 16px;
+    height: 16px;
+    border: 8px solid black;
+    border-radius: 100%;
+}
+
+.wheel.right {
+    left: 175px;
+}
+
+.wheel.right:after {
+    z-index: 1;
+    top: 40px;
+    left: 40px;
+    width: 16px;
+    height: 16px;
+    border: 8px solid black;
+    border-radius: 100%;
+}
+.frame.saddle {
+    top: 25px;
+    left: 85px;
+    width: 50px;
+    height: 20px;
+    background: black;
+    border-radius: 50% 100% 100% 50% / 50% 50% 100% 100%;
+}
+.frame.pedal {
+    top: 135px;
+    left: 140px;
+    width: 16px;
+    height: 16px;
+    border: 8px solid black;
+    border-radius: 100%;
+    animation: wheelSpinning 2s linear infinite;
+}
+.frame.pedal:before {
+    top: -2.5px;
+    left: -4px;
+    width: 8px;
+    height: 20px;
+    background: white;
+    border-radius: 16px 16px 0 0;
+}
+.frame.pedal:after {
+    top: 12px;
+    left: -8px;
+    width: 16px;
+    height: 8px;
+    background: black;
+    border-radius: 16px;
+    animation: pedalSpinning 2s linear infinite;
+}
+.frame.handlebar {
+    top: 8px;
+    left: 190px;
+    width: 30px;
+    height: 8px;
+    border-radius: 16px;
+    transform: rotate(-35deg);
+}
+.frame.handlebar:before {
+    top: -7px;
+    left: 3px;
+    width: 32px;
+    height: 8px;
+    background: black;
+    border-radius: 16px;
+    transform: rotate(45deg);
+}
+
+
+@keyframes wheelSpinning {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pedalSpinning {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+* {
+    box-sizing: border-box;
+}
+*:before, *:after {
+    box-sizing: border-box;
+}
+*:before, *:after {
+    position: absolute;
+    content: '';
+}
+
