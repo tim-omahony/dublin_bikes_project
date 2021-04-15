@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.linear_model import LinearRegression
+import time
 
 APIKEY = "f5c6b9cb5c887092253375f0912332f81099e51d"
 NAME = "Dublin"
@@ -16,7 +17,7 @@ app.template_folder = 'web/templates'
 
 session = Session()
 
-with open('model.pkl', 'rb') as handle:
+with open('ml_model/model.pkl', 'rb') as handle:
     model = pickle.load(handle)
 
 

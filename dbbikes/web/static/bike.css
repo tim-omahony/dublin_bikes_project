@@ -1,19 +1,18 @@
-body {
-    height: 100%;
-    margin: 2%;
-    padding: 0;
-
-}
-
 .bike {
-    width: 380px;
-    height: 300px;
+    width: 290px;
+    height: 210px;
+    margin: auto;
+    position: relative;
+    display: block;
+    transform: scale(0.7);
 }
+
 .frame {
     position: absolute;
     z-index: 1;
     background: blue;
 }
+
 .frame.one {
     top: 100px;
     left: 40px;
@@ -21,6 +20,7 @@ body {
     height: 8px;
     transform: rotate(-50deg);
 }
+
 .frame.two {
     top: 140px;
     left: 53px;
@@ -28,6 +28,7 @@ body {
     height: 8px;
     border-radius: 16px 0 0 16px;
 }
+
 .frame.three {
     top: 90px;
     left: 70px;
@@ -35,14 +36,15 @@ body {
     height: 8px;
     border-radius: 16px;
     transform: rotate(75deg);
-
 }
+
 .frame.four {
     top: 65px;
     left: 120px;
     width: 90px;
     height: 8px;
 }
+
 .frame.five {
     top: 105px;
     left: 130px;
@@ -50,6 +52,7 @@ body {
     height: 8px;
     transform: rotate(-50deg);
 }
+
 .frame.six {
     top: 75px;
     left: 140px;
@@ -58,18 +61,20 @@ body {
     border-radius: 16px;
     transform: rotate(75deg);
 }
+
 .wheel {
     position: absolute;
     z-index: -1;
 }
+
 .wheel.left, .wheel.right {
     top: 90px;
     width: 115px;
     height: 115px;
     border: 8px solid black;
     border-radius: 100%; /* make circular */
-
 }
+
 .wheel.left:after {
     z-index: 1;
     top: 40px;
@@ -93,6 +98,7 @@ body {
     border: 8px solid black;
     border-radius: 100%;
 }
+
 .frame.saddle {
     top: 25px;
     left: 85px;
@@ -101,6 +107,7 @@ body {
     background: black;
     border-radius: 50% 100% 100% 50% / 50% 50% 100% 100%;
 }
+
 .frame.pedal {
     top: 135px;
     left: 140px;
@@ -110,6 +117,7 @@ body {
     border-radius: 100%;
     animation: wheelSpinning 2s linear infinite;
 }
+
 .frame.pedal:before {
     top: -2.5px;
     left: -4px;
@@ -118,6 +126,7 @@ body {
     background: white;
     border-radius: 16px 16px 0 0;
 }
+
 .frame.pedal:after {
     top: 12px;
     left: -8px;
@@ -127,6 +136,7 @@ body {
     border-radius: 16px;
     animation: pedalSpinning 2s linear infinite;
 }
+
 .frame.handlebar {
     top: 8px;
     left: 190px;
@@ -135,6 +145,7 @@ body {
     border-radius: 16px;
     transform: rotate(-35deg);
 }
+
 .frame.handlebar:before {
     top: -7px;
     left: 3px;
@@ -168,9 +179,11 @@ body {
 * {
     box-sizing: border-box;
 }
+
 *:before, *:after {
     box-sizing: border-box;
 }
+
 *:before, *:after {
     position: absolute;
     content: '';

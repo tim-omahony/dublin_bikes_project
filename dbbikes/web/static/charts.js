@@ -35,6 +35,6 @@ function drawChart(stats) {
         height: 300,
     };
 
-    var chart = new google.visualization.BarChart(document.getElementById('stationModalChart'));
+    var chart = new google.visualization.LineChart(document.getElementById('stationModalChart'));
     chart.draw(data, options);
 }

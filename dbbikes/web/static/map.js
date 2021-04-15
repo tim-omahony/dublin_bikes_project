@@ -280,7 +280,6 @@ function populateStations(map) {
                 title: station.address,
                 label: getMarkerLabel(station).toString(),
                 map: map,
-                // icon: '/static/images/marker.png'
             });
             const infowindow = new google.maps.InfoWindow({
                 content: `<h5>${station.address}</h5><p>Available Bikes: <strong>${station.available_bikes}</strong></p><p>Available Spaces: <strong>${station.available_bike_stands}</strong></p>`,
