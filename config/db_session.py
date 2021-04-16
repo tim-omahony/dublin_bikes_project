@@ -7,7 +7,7 @@ if environment == 'development':
 else:
     from config.db_details_prod import *
 
-engine = create_engine("mysql+pymysql://{}:{}@{}:{}/{}".format(USER, PASSWORD, URI, PORT, DB), echo=True)
+engine = create_engine("mysql+pymysql://{}:{}@{}:{}/{}".format(USER, PASSWORD, URI, PORT, DB), pool_recycle=3600, echo=True)
 
 # create a configured "Session" class
 Session = sessionmaker(bind=engine)
